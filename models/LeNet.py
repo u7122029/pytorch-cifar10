@@ -21,3 +21,6 @@ class LeNet(nn.Module):
         x = func.relu(self.fc2(x))
         x = self.fc3(x)
         return x
+
+if __name__ == "__main__":
+    print(LeNet())
