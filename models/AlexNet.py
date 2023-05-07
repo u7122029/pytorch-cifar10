@@ -1,5 +1,5 @@
 import torch.nn as nn
-
+import torch
 '''
 modified to fit dataset size
 '''
@@ -39,3 +39,11 @@ class AlexNet(nn.Module):
         x = x.view(x.size(0), 256 * 2 * 2)
         x = self.classifier(x)
         return x
+
+def alexnet(pretrained=True, device="cpu"):
+    model = AlexNet()
+    if pretrained:
+        model = torch.hub.load_state_dict_from_url(
+            "https://github.com/u7122029/pytorch-cifar10/releases/download/pretrained/alexnet.pth",
+            map_location=device)
+    return model
