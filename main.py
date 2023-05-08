@@ -9,6 +9,7 @@ import argparse
 
 from models import *
 from models.LeNet5 import LeNet5, lenet5
+from models.Linear import Linear
 from misc import progress_bar
 
 
@@ -17,8 +18,8 @@ CLASSES = ('plane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship'
 
 def main():
     parser = argparse.ArgumentParser(description="cifar-10 with PyTorch")
-    parser.add_argument('--lr', default=0.001, type=float, help='learning rate')
-    parser.add_argument('--epoch', default=35, type=int, help='number of epochs tp train for')
+    parser.add_argument('--lr', default=5e-4, type=float, help='learning rate')
+    parser.add_argument('--epoch', default=75, type=int, help='number of epochs tp train for')
     parser.add_argument('--trainBatchSize', default=100, type=int, help='training batch size')
     parser.add_argument('--testBatchSize', default=100, type=int, help='testing batch size')
     parser.add_argument('--cuda', default=torch.cuda.is_available(), type=bool, help='whether cuda is in use')
@@ -62,13 +63,13 @@ class Solver(object):
     def load_model(self):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         #if self.test_model_file:
-        self.model = torch.load(self.test_model_file)
-        self.model = self.model.to(self.device)
+        #self.model = torch.load("linear.pth")
+        #self.model = self.model.to(self.device)
         #else:
         #self.model = lenet5()
-
+        #self.model = Linear().to(self.device)
             # self.model = LeNet().to(self.device)
-        #self.model = AlexNet().to(self.device)
+        self.model = AlexNet().to(self.device)
             # self.model = VGG11().to(self.device)
             # self.model = VGG13().to(self.device)
             # self.model = VGG16().to(self.device)
@@ -158,10 +159,12 @@ class Solver(object):
             train_result = self.train()
             print(train_result)
             test_result = self.test()
-            accuracy = max(accuracy, test_result[1])
+            if test_result[1] > accuracy:
+                accuracy = test_result[1]
+                self.save()
+
             if epoch == self.epochs:
                 print("===> BEST ACC. PERFORMANCE: %.3f%%" % (accuracy * 100))
-                self.save()
 
 
 if __name__ == '__main__':
