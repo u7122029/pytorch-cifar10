@@ -1,3 +1,4 @@
+import torch
 import torch.nn as nn
 import torch.nn.functional as func
 
@@ -14,5 +15,13 @@ class Linear(nn.Module):
         x = self.fc(x)
         return x
 
+def linear(pretrained=True, device="cpu"):
+    model = Linear()
+    if pretrained:
+        model = torch.hub.load_state_dict_from_url(
+            "https://github.com/u7122029/pytorch-cifar10/releases/download/pretrained/linear.pth",
+            map_location=device)
+    return model
+
 if __name__ == "__main__":
-    print(Linear())
+    print(linear())
