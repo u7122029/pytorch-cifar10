@@ -66,10 +66,10 @@ class Solver(object):
         #self.model = torch.load("linear.pth")
         #self.model = self.model.to(self.device)
         #else:
-        #self.model = lenet5()
-        #self.model = Linear().to(self.device)
+        #self.model = LeNet5().to(self.device)
+        self.model = Linear().to(self.device)
             # self.model = LeNet().to(self.device)
-        self.model = AlexNet().to(self.device)
+        #self.model = AlexNet().to(self.device)
             # self.model = VGG11().to(self.device)
             # self.model = VGG13().to(self.device)
             # self.model = VGG16().to(self.device)
