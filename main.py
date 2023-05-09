@@ -4,12 +4,14 @@ import torch.backends.cudnn as cudnn
 import torchvision
 from torchvision import transforms as transforms
 import numpy as np
+import torch.nn as nn
 
 import argparse
 
 from models import *
 from models.LeNet5 import LeNet5, lenet5
 from models.Linear import Linear
+from models.OBC import OBC
 from misc import progress_bar
 
 
@@ -67,7 +69,8 @@ class Solver(object):
         #self.model = self.model.to(self.device)
         #else:
         #self.model = LeNet5().to(self.device)
-        self.model = Linear().to(self.device)
+        self.model = OBC().to(self.device)
+        #self.model = Linear().to(self.device)
             # self.model = LeNet().to(self.device)
         #self.model = AlexNet().to(self.device)
             # self.model = VGG11().to(self.device)
