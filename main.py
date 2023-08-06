@@ -8,10 +8,10 @@ import torch.nn as nn
 
 import argparse
 
-from models import *
-from models.LeNet5 import LeNet5, lenet5
-from models.Linear import Linear
-from models.OBC import OBC
+from pytorch_models import *
+from pytorch_models.LeNet5 import LeNet5, lenet5
+from pytorch_models.Linear import Linear
+from pytorch_models.OBC import OBC
 from misc import progress_bar
 
 

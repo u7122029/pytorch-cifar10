@@ -17,6 +17,7 @@ class OBC(nn.Module):
         x = self.fc(x)
         return x
 
+
 def obc(pretrained=True, device="cpu"):
     model = OBC()
     if pretrained:

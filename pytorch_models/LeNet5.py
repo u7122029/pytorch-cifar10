@@ -31,6 +31,7 @@ class LeNet5(nn.Module):
         out = self.fc2(out)
         return out
 
+
 def lenet5(pretrained=True, device="cpu"):
     model = LeNet5()
     if pretrained:
@@ -38,6 +39,7 @@ def lenet5(pretrained=True, device="cpu"):
             "https://github.com/u7122029/pytorch-cifar10/releases/download/pretrained/lenet5.pth",
             map_location=device)
     return model
+
 
 if __name__ == "__main__":
     print(lenet5())
